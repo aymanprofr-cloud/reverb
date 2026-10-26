@@ -1,0 +1,22 @@
+name: Build VST3 Windows
+
+on: [push]
+
+jobs:
+  build:
+  
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Run Windows Build Script
+      run: |
+        cd VelvetVerb
+        cmd.exe /c build_windows.bat
+
+    - name: Upload VST3 Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: VelvetVerb-VST3-Windows
+        path: VelvetVerb/build/**/*.vst3
